@@ -1,28 +1,32 @@
-public class Solution {
-​
-    public int FindCircleNum(int[][] M) 
-    {
-        int count = 0;
-        int[] visited = new int[M.Length];
-        for(int i =  0 ; i < M.Length ; i++)
+        }      
+        int[] visited = new int[count];
+        for(int i = 0 ; i < count ; i++)
         {
             if(visited[i] == 0)
             {
-                DFS(M,visited,i);
-                count++;
-            }
-        }        
-        return count;
+              DFS(visited,i);
+              components++;
+            }         
+        }      
+        return components;
+        
+    }
+    private void AddEdge(int src,int dest)
+    {
+        if(src == dest) return;        
+        Console.WriteLine($"adding edge between {src} and {dest}");
+        adjList[src].Add(dest);        
     }
     
-    private void DFS(int[][] M,int[] visited,int i)
+    private void DFS(int[] visited,int i)
     {
-        for(int j = 0 ; j < M[i].Length ; j++)
+        visited[i] = 1;
+        Console.WriteLine($"visited : {i}");
+        foreach(int val in adjList[i])
         {
-            if(M[i][j] == 1 && visited[j] == 0)
+            if(visited[val] == 0)
             {
-                visited[j] = 1;
-                DFS(M,visited,j);
+                DFS(visited,val);
             }
         }
     }
