@@ -1,10 +1,6 @@
 public class Solution {
-    int max = Int32.MaxValue;
-    int min = Int32.MinValue;
     public int MyAtoi(string s) 
-    {
-        if(string.IsNullOrEmpty(s)) return 0;
-        
+    {        
             string str = s;
             long res = 0;
             var sign = 1;            
@@ -31,5 +27,5 @@ public class Solution {
                 index++;
             }
             return (int)res * sign;
-    }
+    }
 }
