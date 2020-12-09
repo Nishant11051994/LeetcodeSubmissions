@@ -12,8 +12,7 @@ public class Solution {
         {
             result.Add(new List<int>(current));
             return;
-        }
-            
+        }           
         int[] childs = graph[currIndex];
         for(int i = 0 ; i < childs.Length ; i++)
         {
