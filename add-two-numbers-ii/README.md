@@ -1,3 +1,4 @@
+[Discussion Post (created on 26/0/2021 at 13:37)](https://leetcode.com/problems/add-two-numbers-ii/submissions/)  
 <h2>445. Add Two Numbers II</h2><h3>Medium</h3><hr><div><p>You are given two <b>non-empty</b> linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
 
 <p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
