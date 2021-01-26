@@ -1,3 +1,4 @@
+[Discussion Post (created on 26/0/2021 at 10:12)](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/discuss/1035628/C-DFS-Easy-To-Understand-with-detailed-Explanation.)  
 <h2>1466. Reorder Routes to Make All Paths Lead to the City Zero</h2><h3>Medium</h3><hr><div><p>There are&nbsp;<code>n</code>&nbsp;cities numbered from&nbsp;<code>0</code>&nbsp;to&nbsp;<code>n-1</code> and&nbsp;<code>n-1</code> roads such that&nbsp;there is only one way to travel between two&nbsp;different cities (this network form a tree).&nbsp;Last year,&nbsp;The ministry of transport&nbsp;decided to orient the roads in one direction because they are too narrow.</p>
 
 <p>Roads are represented by&nbsp;<code>connections</code>&nbsp;where&nbsp;<code>connections[i] = [a, b]</code>&nbsp;represents a&nbsp;road&nbsp;from city&nbsp;<code>a</code>&nbsp;to&nbsp;<code>b</code>.</p>
