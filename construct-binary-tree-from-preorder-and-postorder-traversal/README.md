@@ -1,3 +1,4 @@
+[Discussion Post (created on 4/1/2021 at 23:0)](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/solution/)  
 <h2>889. Construct Binary Tree from Preorder and Postorder Traversal</h2><h3>Medium</h3><hr><div><p>Return any binary tree that matches the given preorder and postorder traversals.</p>
 
 <p>Values in the traversals&nbsp;<code>pre</code> and <code>post</code>&nbsp;are distinct&nbsp;positive integers.</p>
