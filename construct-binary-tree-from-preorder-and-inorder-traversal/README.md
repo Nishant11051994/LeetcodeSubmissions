@@ -1,3 +1,4 @@
+[Discussion Post (created on 4/1/2021 at 23:14)](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solution/)  
 <h2>105. Construct Binary Tree from Preorder and Inorder Traversal</h2><h3>Medium</h3><hr><div><p>Given preorder and inorder traversal of a tree, construct the binary tree.</p>
 
 <p><strong>Note:</strong><br>
