@@ -3,7 +3,7 @@ public class Solution {
     {
          if(nums == null || nums.Length == 0)
           {
-            return -1;
+            return 0;
           }  
           return BinarySearch(nums);
     }
