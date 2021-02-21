@@ -1,3 +1,4 @@
+[Discussion Post (created on 21/1/2021 at 17:8)](https://leetcode.com/problems/time-based-key-value-store/discuss/1076205/C-Dictionary-and-Binary-Search-Generic-Template-with-Explanation)  
 <h2>981. Time Based Key-Value Store</h2><h3>Medium</h3><hr><div><p>Create a timebased key-value store class&nbsp;<code>TimeMap</code>, that supports two operations.</p>
 
 <p>1. <code>set(string key, string value, int timestamp)</code></p>
