@@ -37,15 +37,29 @@ public class TimeMap {
         if(timestamp > keyTimeStampValueMap[key].Last().timestamp)
         {
             return keyTimeStampValueMap[key].Last().value;
-        }
-        
+        }        
         return BinarySearch(keyTimeStampValueMap[key],timestamp);        
     }
     private string BinarySearch(List<Cache> list,int timeStamp)
     {
         int start = 0;
-        int end = list.Count-1;        
+        int end = list.Count-1;     
+        int index = -1;
         while(start <= end)
+        {
+            int mid = start + (end-start)/2;
+            if(list[mid].timestamp > timeStamp)
+            {
+                end = mid - 1;
+            }
+            else 
+            {
+                index = mid;
+                start = mid + 1;
+            }
+        }  
+        return list[index].value;
+       /* while(start <= end)
         {
             int mid = start + (end-start)/2;
             if(list[mid].timestamp == timeStamp ||
@@ -61,7 +75,8 @@ public class TimeMap {
             {
                 start = mid+1;
             }
-        }        
+        }    
+        */
         return "";
     }
 }
