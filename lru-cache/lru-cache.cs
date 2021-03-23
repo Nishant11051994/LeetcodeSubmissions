@@ -23,7 +23,7 @@ public class LRUCache {
         if(map.ContainsKey(key))
         {
             int val = map[key].Value.value;
-            Remove(key,val);
+            Remove(key);
             AddNode(key,val);
             return val;
         }
@@ -37,11 +37,11 @@ public class LRUCache {
         }
         else
         {
-            Remove(key,value);         
+            Remove(key);         
         }  
         AddNode(key,value);
     }
-    public void Remove(int key,int value)
+    public void Remove(int key)
     {
         if(map.ContainsKey(key))
          {
