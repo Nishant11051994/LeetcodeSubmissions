@@ -1,3 +1,4 @@
+[Discussion Post (created on 17/3/2021 at 12:45)](https://leetcode.com/problems/encode-and-decode-strings/discuss/1162479/C-Easy-to-Understand-String-Manipulation)  
 <h2>271. Encode and Decode Strings</h2><h3>Medium</h3><hr><div><p>Design an algorithm to encode <b>a list of strings</b> to <b>a string</b>. The encoded string is then sent over the network and is decoded back to the original list of strings.</p>
 
 <p>Machine 1 (sender) has the function:</p>
