@@ -1,49 +1,91 @@
-public class Solution {
-    public IList<string> FindWords(char[][] board, string[] words) 
+public class Trie
+{
+    int count = 26;
+    public Trie[] children;
+    public Trie()
     {
-        List<string> list = new List<string>();
-        
-       for(int k = 0 ; k < words.Length ; k++)
-        {
-          for(int i = 0 ;  i < board.Length; i++)
-           {
-            for(int j = 0 ; j < board[0].Length; j++)
-            {
-                if(board[i][j] == words[k][0] &&  IsFound(board,i,j,words[k],0))
-                {  
-                    if(!list.Contains(words[k]))
-                    list.Add(words[k]);
-                }               
-            }            
-          }    
-        }        
-        return list;
+        children = new Trie[count];
     }
-    private bool IsSafe(char[][] board,int row,int col,string word,int index)
+    public void Insert(string word)
     {
-        if(row < board.Length && row >=0 && col < board[0].Length && col >=0 && index < word.Length && board[row][col] == word[index])
+        Trie temp = this;
+        for(int i = 0 ; i < word.Length ; i++)
+        {
+            int index = word[i] - 'a';
+            if(temp.children[index] == null)
+            {
+                temp.children[index] = new Trie();
+            }
+            temp = temp.children[index];
+        }
+    }
+    public bool StartsWith(string word)
+    {
+        Trie temp = this;
+        for(int i = 0 ; i < word.Length ; i++)
+        {
+            int index = word[i] - 'a';
+            if(temp.children[index] == null)
+            {
+                return false;
+            }
+            temp = temp.children[index];
+        }
+        return true;
+    }
+}
+public class Solution {
+    HashSet<string> list = new HashSet<string>();
+    HashSet<string> set;
+    bool[,] visited;
+    public IList<string> FindWords(char[][] board, string[] words) 
+    {       
+        if(board == null || board.Length == 0 || words == null || words.Length == 0) return null;
+        
+        // Constructing Trie
+        Trie root = new Trie();
+        
+        set = new HashSet<string>(words);
+        foreach(string s in words)
+        {
+            root.Insert(s);
+        }        
+        for(int i = 0 ; i < board.Length ; i++)
+        {
+            for(int j = 0 ; j < board[i].Length ; j++)
+            {
+               visited = new bool[board.Length,board[0].Length];
+               IsFound(board,i,j,root,"");
+            }
+        }                 
+        return list.ToList();      
+    }
+    private bool IsSafe(char[][] board,int row,int col)
+    {
+        if(row < board.Length && row >=0 && col < board[0].Length && col >=0 && !visited[row,col])
         {  
             return true;
         }
         return false;
     }
-    private bool IsFound(char[][] board,int row,int col,string word,int index)
-    {
-           if(index == word.Length) return true;
+    private void IsFound(char[][] board,int row,int col,Trie root,string prefix)
+    {               
+           if(!IsSafe(board,row,col)) return;
         
-           if(!IsSafe(board,row,col,word,index)) return false;
-            int indexOrignal = index;     
+           char currChar = board[row][col];
+           prefix += board[row][col];
         
-            board[row][col] = ' ';    
+           if(!root.StartsWith(prefix)) return;
         
-            bool ret = IsFound(board,row+1,col,word,index+1)||
-            IsFound(board,row,col+1,word,index+1)||
-            IsFound(board,row-1,col,word,index+1)||
-            IsFound(board,row,col-1,word,index+1);
-
+           if(set.Contains(prefix)) list.Add(prefix);    
         
-            board[row][col] = word[indexOrignal];
+            visited[row,col] = true;    
         
-        return ret;
+            IsFound(board,row+1,col,root,prefix);
+            IsFound(board,row,col+1,root,prefix);
+            IsFound(board,row-1,col,root,prefix);
+            IsFound(board,row,col-1,root,prefix);
+                   
+            visited[row,col] = false;
     }
 }
