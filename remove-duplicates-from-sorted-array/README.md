@@ -1,3 +1,4 @@
+[Discussion Post (created on 15/4/2021 at 23:8)](https://leetcode.com/problems/remove-duplicates-from-sorted-array/discuss/1210399/C-Two-Pointers)  
 <h2>26. Remove Duplicates from Sorted Array</h2><h3>Easy</h3><hr><div><p>Given a sorted array <em>nums</em>, remove the duplicates <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank"><strong>in-place</strong></a> such that each element appears only <em>once</em> and returns the new length.</p>
 
 <p>Do not allocate extra space for another array, you must do this by <strong>modifying the input array <a href="https://en.wikipedia.org/wiki/In-place_algorithm" target="_blank">in-place</a></strong> with O(1) extra memory.</p>
