@@ -1,66 +1,59 @@
-public class Cache
-{
-    public int key;
-    public int value;
-    public Cache(int x,int y)
-    {
-        key = x;
-        value = y;
-    }
-}
 public class LRUCache {
-    int capacity;
-    Dictionary<int,LinkedListNode<Cache>> map;
-    LinkedList<Cache> list;
+
+    int capacity = 0;
+    Dictionary<int,int> keyAndValue = new Dictionary<int,int>();
+    Dictionary<int,LinkedListNode<int>> keyAndNode  = new Dictionary<int,LinkedListNode<int>>();
+    LinkedList<int> list = new LinkedList<int>(); 
     public LRUCache(int capacity) 
     {
         this.capacity = capacity;
-        map = new Dictionary<int,LinkedListNode<Cache>>();
-        list = new LinkedList<Cache>();
-    }    
+    }
+    
     public int Get(int key) 
     {
-        if(map.ContainsKey(key))
-        {
-            int val = map[key].Value.value;
+        if(keyAndValue.ContainsKey(key))
+        {   
+            int val = keyAndValue[key];
             Remove(key);
-            AddNode(key,val);
-            return val;
+            Add(key,val);
+            return keyAndValue[key];
         }
-        return -1;        
-    }    
+        return -1;
+    }
+    
     public void Put(int key, int value) 
     {
-        if(!map.ContainsKey(key) && map.Count == capacity)
+        if(keyAndNode.ContainsKey(key))
         {
-            RemoveLast();
+            keyAndNode[key].Value = value;
+            Remove(key);
+            Add(key,value);            
         }
         else
         {
-            Remove(key);         
-        }  
-        AddNode(key,value);
+            if(keyAndNode.Count == capacity)
+            {
+                LinkedListNode<int> firstNode = list.First;
+                keyAndValue.Remove(firstNode.Value);
+                keyAndNode.Remove(firstNode.Value);
+                list.RemoveFirst();                
+            }   
+            Add(key,value);
+        }      
+    }
+    public void Add(int key,int val)
+    {
+        LinkedListNode<int> currNode = new LinkedListNode<int>(key);
+        keyAndValue.Add(key,val);
+        keyAndNode.Add(key,currNode);
+        list.AddLast(currNode);
     }
     public void Remove(int key)
     {
-        if(map.ContainsKey(key))
-         {
-            var node = map[key];
-            list.Remove(node);
-         }
-    }
-    public void AddNode(int key,int value)
-    {
-        LinkedListNode<Cache> newNode = new LinkedListNode<Cache>(new Cache(key,value));
-        map[key] = newNode;
-        list.AddFirst(newNode); 
-    }
-    public void RemoveLast()
-    {
-       LinkedListNode<Cache> lastNode = list.Last;
-       list.RemoveLast();
-       int keyToBeRemoved = lastNode.Value.key;
-       map.Remove(keyToBeRemoved);
+        LinkedListNode<int> currNode = keyAndNode[key];
+        list.Remove(currNode);
+        keyAndNode.Remove(key);
+        keyAndValue.Remove(key);
     }
 }
 
