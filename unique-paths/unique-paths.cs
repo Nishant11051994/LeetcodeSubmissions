@@ -1,27 +1,24 @@
 public class Solution {
     public int UniquePaths(int m, int n) 
     {
-       int[,] dp = new int[m,n];
-       return Recurse(m,n,0,0,dp);
-    }
-    private int Recurse(int m,int n,int i,int j,int[,] dp)
-    {
-        if(i == m-1 && j == n-1)
+        int[,] dp = new int[m,n];
+        
+        for(int i = 0 ; i < m ; i++)
         {
-            return 1;
+            dp[i,0] = 1;
         }
-        if(dp[i,j] != 0) return dp[i,j];
-        int path1 = 0;
-        int path2 = 0;
-        if(i+1 < m)
+        for(int i = 0 ; i < n ; i++)
         {
-            path1 = Recurse(m,n,i+1,j,dp);
+            dp[0,i] = 1;
         }
-        if(j+1 < n)
+        
+        for(int i = 1 ; i < m ; i++)
         {
-            path2 = Recurse(m,n,i,j+1,dp);
-        }
-        dp[i,j] = path1 + path2;
-        return dp[i,j];
+            for(int j = 1 ; j < n ; j++)
+            {
+                dp[i,j] = dp[i-1,j] + dp[i,j-1];
+            }
+        }        
+        return dp[m-1,n-1];
     }
 }
