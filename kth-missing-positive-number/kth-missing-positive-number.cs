@@ -3,20 +3,22 @@ public class Solution {
     {
         if(arr == null || arr.Length == 0) return 0;
         
-        int count = 0;
-        int currPositive = 1;
         
-        HashSet<int> set = new HashSet<int>(arr);
+        if(k <= arr[0] - 1) return k;
         
-        while(count < k)
+        // Deduct k 
+        k -= arr[0] - 1;
+        
+        for(int i = 0 ; i < arr.Length-1; i++)
         {
-            if(!set.Contains(currPositive))
+            int currDiff = arr[i+1] - arr[i] - 1;
+            if(currDiff >= k)
             {
-                count++;
+                return arr[i] + k;               
             }
-            currPositive++;
-        }
+            k -= currDiff;
+        }        
+        return arr[arr.Length-1] + k;
         
-        return currPositive-1;
     }
 }
