@@ -12,22 +12,24 @@
  * }
  */
 public class Solution {
-    int maxNodes = 0;
+    private int diameter = 0;
     public int DiameterOfBinaryTree(TreeNode root) 
     {
-        if(root == null) return 0;
-        CountNodes(root);       
-        return maxNodes - 1;
+        LongestPath(root);
+        return diameter;
     }
-    private int CountNodes(TreeNode root)
+    private int LongestPath(TreeNode root)
     {
-        if(root == null) return 0;
+        if(root == null)
+        {
+            return 0;
+        }
         
-        int left = CountNodes(root.left);
-        int right = CountNodes(root.right);
+        int leftPath = LongestPath(root.left);
+        int rightPath = LongestPath(root.right);
         
-        maxNodes = Math.Max(maxNodes,left+right+1);
+        diameter = Math.Max(diameter, leftPath + rightPath);
         
-        return 1 + Math.Max(left,right);       
+        return (Math.Max(leftPath,rightPath) + 1);
     }
 }
