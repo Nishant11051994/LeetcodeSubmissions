@@ -1,21 +1,30 @@
 public class Solution {
-    public int MinPathSum(int[][] grid) 
-    {
-        if(grid == null || grid.Length == 0) return 0; 
-        int[,] dp = new int[grid.Length,grid[0].Length];
-        return MinSum(grid,0,0,dp);
-    }
-    private int MinSum(int[][] grid,int x,int y,int[,] dp)
-    {
-        if(x == grid.Length || y == grid[0].Length)
-        {
-            return Int32.MaxValue;
-        }
-        if(x == grid.Length-1 && y == grid[0].Length-1) return grid[x][y];
-        
-        if(dp[x,y] != 0) return dp[x,y];
-        
-        dp[x,y] =  grid[x][y] + Math.Min(MinSum(grid,x+1,y,dp),MinSum(grid,x,y+1,dp));    
-        return dp[x,y];
-    }
+    public int MinPathSum(int[][] grid) 
+    {
+        if(grid == null || grid.Length == 0) return 0;
+        
+        int m = grid.Length;
+        int n = grid[0].Length;
+        
+        
+        
+        for(int i = 1 ; i < m ; i++)
+        {
+            grid[i][0] += grid[i-1][0];
+        }
+        for(int i = 1 ; i < n ; i++)
+        {
+            grid[0][i] += grid[0][i-1];
+        }
+        
+        for(int i = 1 ; i < grid.Length ; i++)
+        {
+            for(int j = 1 ; j < grid[0].Length ; j++)
+            {
+                grid[i][j] += Math.Min(grid[i-1][j], grid[i][j-1]);
+            }
+        }     
+        return grid[m-1][n-1];
+        
+    }
 }
