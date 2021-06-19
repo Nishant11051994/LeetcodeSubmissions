@@ -2,31 +2,39 @@ public class Solution {
     public int UniquePathsWithObstacles(int[][] obstacleGrid) 
     {
         if(obstacleGrid == null || obstacleGrid.Length == 0) return 0;
+       
+        int m = obstacleGrid.Length;
+        int n = obstacleGrid[0].Length;
         
-        int[,] dp = new int[obstacleGrid.Length,obstacleGrid[0].Length];
+        if(obstacleGrid[0][0] == 1 || obstacleGrid[m-1][n-1] == 1) return 0;
         
+        int[,] dp = new int[m,n];
         
-        return obstacleGrid[0][0] == 1 ? 0 : Recurse(obstacleGrid,0,0,dp);
-    }
-    private int Recurse(int[][] grid,int i,int j,int[,] dp)
-    {
-        if(i == grid.Length-1 && j == grid[i].Length-1 && 
-           grid[grid.Length-1][grid[i].Length-1] == 0)
+        dp[0,0] = 1;
+        
+        for(int i = 1 ; i < m ; i++)
         {
-            return 1;
+            if(obstacleGrid[i][0] != 1)
+            dp[i,0] = dp[i-1,0];
         }
-        if(dp[i,j] != 0) return dp[i,j];
-        int path1 = 0;
-        int path2 = 0;
-        if(i < grid.Length-1 && grid[i+1][j] != 1)
+        
+        for(int i = 1 ; i < n ; i++)
         {
-            path1 = Recurse(grid,i+1,j,dp);
+            if(obstacleGrid[0][i] != 1)
+            dp[0,i] = dp[0,i-1];
         }
-        if(j < grid[0].Length-1 && grid[i][j+1] != 1)
+        
+        for(int i = 1 ; i < m ; i++)
         {
-            path2 = Recurse(grid,i,j+1,dp);
+            for(int j = 1 ; j < n ; j++)
+            {
+                if(obstacleGrid[i][j] != 1)
+                {
+                    dp[i,j] = dp[i-1,j] + dp[i,j-1];
+                }
+            }
         }
-        dp[i,j] = path1 + path2;
-        return dp[i,j];
+        
+        return dp[m-1,n-1];
     }
 }
