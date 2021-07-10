@@ -1,3 +1,4 @@
+[Discussion Post (created on 10/6/2021 at 19:33)](https://leetcode.com/problems/reorganize-string/discuss/1328792/C-MaxHeap)  
 <h2>767. Reorganize String</h2><h3>Medium</h3><hr><div><p>Given a string <code>s</code>, rearrange the characters of <code>s</code> so that any two adjacent characters are not the same.</p>
 
 <p>Return <em>any possible rearrangement of</em> <code>s</code> <em>or return</em> <code>""</code> <em>if not possible</em>.</p>
