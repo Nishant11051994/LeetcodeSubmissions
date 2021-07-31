@@ -17,35 +17,41 @@
  */
 public class NestedIterator {
 
-    List<int> list;
-    int index = 0;
+    Stack<NestedInteger> stack;
     public NestedIterator(IList<NestedInteger> nestedList) 
     {
-        list = new List<int>();
-        InitialiseList(nestedList);
-    }
-    private void InitialiseList(IList<NestedInteger> nestedList)
-    {
-        foreach(NestedInteger item in nestedList)
+        stack = new Stack<NestedInteger>();
+        for(int i = nestedList.Count-1 ; i >= 0 ; i--)
         {
-            if(item.IsInteger())
-            {
-                list.Add(item.GetInteger());
-            }
-            else
-            {
-                InitialiseList(item.GetList());
-            }
+           stack.Push(nestedList[i]);
         }
     }
+
     public bool HasNext() 
     {
-        if(index < list.Count) return true;
-        return false;
+        MakeStackTopInteger();
+        
+        return stack.Count  != 0;
     }
+
     public int Next() 
     {
-        return list[index++];
+        if(!HasNext()) return -1;
+        
+        int topElement = stack.Pop().GetInteger();
+               
+        return topElement;
+    }
+    private void MakeStackTopInteger()
+    {
+        while(!(stack.Count == 0) && !stack.Peek().IsInteger())
+        {
+            IList<NestedInteger> nestedList = stack.Pop().GetList();
+            for(int i = nestedList.Count-1 ; i >= 0 ; i--)
+            {
+                stack.Push(nestedList[i]);
+            }
+        }
     }
 }
 
