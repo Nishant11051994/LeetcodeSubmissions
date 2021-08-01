@@ -4,39 +4,39 @@
 public class Solution : Relation {
     public int FindCelebrity(int n) 
     {
-        int celebrityCount = 0;
         int celeb = -1;
+        int celebrityCount = 0;
         for(int i = 0 ; i < n ; i++)
         {
-            bool follow = false;
+            bool followSomeone = false;
             for(int j = 0 ; j < n ; j++)
             {
-                if(i != j && Knows(i,j))
+                if(Knows(i,j) && i != j)
                 {
-                    Console.WriteLine($"i is {i}");
-                    follow = true;
+                    followSomeone = true;
                     break;
                 }
             }
-            if(!follow)
+            if(!followSomeone)
             {
-                Console.WriteLine($"--i is {i}");
                 celeb = i;
                 celebrityCount++;
             }
         }
-        Console.WriteLine($"count is {celebrityCount} and celeb is {celeb}");
-            if(celeb ==  -1) return -1;
-            bool followBack = true;
-            for(int j = 0 ; j < n ; j++)
+        
+        Console.WriteLine(celeb);
+        if(celeb ==  -1) return -1;
+        
+        bool allFollow = true;
+        for(int i = 0 ; i < n ; i++)
+        {
+            if(celeb != i && !Knows(i,celeb))
             {
-                if(celeb != j && !Knows(j,celeb))
-                {
-                    //Console.WriteLine($"i is {i}");
-                    followBack = false;
-                    break;
-                }
+                allFollow = false;
+                break;
             }
-        return celebrityCount == 1 && followBack ? celeb : -1;
+        }
+               
+        return celebrityCount == 1  && allFollow ? celeb : -1;
     }
 }
