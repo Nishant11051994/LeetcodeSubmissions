@@ -1,3 +1,4 @@
+[Discussion Post (created on 10/7/2021 at 23:10)](https://leetcode.com/problems/angle-between-hands-of-a-clock/discuss/1395735/C-or-Easy)  
 <h2>1344. Angle Between Hands of a Clock</h2><h3>Medium</h3><hr><div><p>Given two numbers, <code>hour</code> and <code>minutes</code>. Return the smaller angle (in degrees) formed between the <code>hour</code> and the <code>minute</code> hand.</p>
 
 <p>&nbsp;</p>
