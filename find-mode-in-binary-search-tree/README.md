@@ -1,3 +1,4 @@
+[Discussion Post (created on 23/7/2021 at 0:7)](https://leetcode.com/problems/find-mode-in-binary-search-tree/discuss/1419969/C-Easy-or-InOrder-Travsersal)  
 <h2>501. Find Mode in Binary Search Tree</h2><h3>Easy</h3><hr><div><p>Given the <code>root</code> of a binary search tree (BST) with duplicates, return <em>all the <a href="https://en.wikipedia.org/wiki/Mode_(statistics)" target="_blank">mode(s)</a> (i.e., the most frequently occurred element) in it</em>.</p>
 
 <p>If the tree has more than one mode, return them in <strong>any order</strong>.</p>
