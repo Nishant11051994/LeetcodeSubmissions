@@ -71,22 +71,67 @@ public class Solution {
         
         Array.Sort(products);
         
+        for(int i = 0; i < products.Length ; i++)
+        {
+            Console.WriteLine($"{products[i]}");
+        }
+        
         StringBuilder sb = new StringBuilder();
         
         for(int i = 0 ; i < searchWord.Length ; i++)
         {
             sb.Append(searchWord[i]);
-            List<string> curr = new List<string>();
-            for(int j = 0 ; j < products.Length ; j++)
+            List<string> curr = new List<string>();            
+            /*for(int j = 0 ; j < products.Length ; j++)
             {
                 if(products[j].StartsWith(sb.ToString()) && curr.Count < 3)
                 {
                     curr.Add(products[j]);
                 }
+                if(curr.Count == 3)
+                {
+                    break;
+                }
             }
+            */
+            int firstMatch = BinarySearchExtremeLeft(products,sb.ToString());
+            Console.WriteLine(firstMatch);
+            
+            if(firstMatch != -1)
+            {
+                for(int k = 0 ; k < 3 &&  k + firstMatch < products.Length; k++)
+                {
+                  if(products[k + firstMatch].StartsWith(sb.ToString()))
+                  curr.Add(products[k + firstMatch]);
+                }
+            }          
             result.Add(curr);
         }
         
         return result;
+    }
+    private int BinarySearchExtremeLeft(string[] products,string word)
+    {
+        int start = 0;
+        int end = products.Length-1;
+        int firstOcc  = -1;
+        while(start <= end)
+        {
+            int mid = start + (end-start)/2;
+            if(products[mid].StartsWith(word))
+            {
+                firstOcc = mid;
+                end = mid-1;
+            }
+            else if(String.Compare(products[mid],word) < 0)
+            {
+                start = mid + 1;               
+            }
+            else
+            {
+                end = mid - 1;
+            }
+        }
+        return firstOcc;
     }
 }
