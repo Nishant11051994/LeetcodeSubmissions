@@ -1,44 +1,64 @@
 public class Solution {
     public int[] SearchRange(int[] nums, int target) 
     {
-        int[] result = new int[2]{-1,-1};
-       
-        result[0] = BinarySearch(nums,target,true);
-        result[1] = BinarySearch(nums,target,false);
-             
-        return result;
+        int[] res = new int[2];
+        res[0] = -1;
+        res[1] = -1;
+        if(nums == null || nums.Length == 0) return res;
+        
+        res[0] = FindFirst(nums,target);
+        res[1] = FindLast(nums,target);
+        
+        return res;
     }
-    private int BinarySearch(int[] nums, int target, bool leftBias)
+    private int FindFirst(int[] nums,int target)
     {
-        int start = 0;
-        int end = nums.Length-1;
-        int i = -1;
+       int left = 0;
+       int right = nums.Length-1;
+       int leftMost = -1;
         
-        while(start <= end)
-        {
-            int mid = start + (end - start)/2;
-            if(target > nums[mid])
-            {
-                start = mid + 1;
-            }
-            else if(target < nums[mid])
-            {
-                end = mid - 1;
-            }
-            else
-            {
-                i = mid;
-                if(leftBias)
-                {
-                    end = mid - 1;
-                }
-                else
-                {
-                    start = mid + 1;
-                }
-            }
-        }        
-        return i;
+       while(left <= right)
+       {
+           int mid = left + (right-left)/2;
+           if(nums[mid] == target)
+           {
+               leftMost = mid;
+               right = mid - 1;
+           }
+           else if(nums[mid] > target)
+           {
+               right = mid - 1;
+           }
+           else
+           {
+               left = mid + 1;
+           }
+       }
+       return leftMost;
+    }
+    private int FindLast(int[] nums,int target)
+    {
+        int left = 0;
+       int right = nums.Length-1;
+       int rightMost = -1;
         
+       while(left <= right)
+       {
+           int mid = left + (right-left)/2;
+           if(nums[mid] == target)
+           {
+               rightMost = mid;
+               left = mid + 1;
+           }
+           else if(nums[mid] > target)
+           {
+               right = mid - 1;
+           }
+           else
+           {
+               left = mid + 1;
+           }
+       }
+       return rightMost;
     }
 }
