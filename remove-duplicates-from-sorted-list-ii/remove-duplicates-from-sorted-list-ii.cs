@@ -9,6 +9,7 @@
  *     }
  * }
  */
+// Leetcode solution
 public class Solution {
     public ListNode DeleteDuplicates(ListNode head) 
     {
