@@ -1,20 +1,29 @@
 public class Solution {
-    public int MinCostClimbingStairs(int[] cost) 
-    {
-        if(cost == null) return 0;
-        int[] dp = new int[cost.Length];
-        return Math.Min(Recurse(cost,0,dp),Recurse(cost,1,dp));
-    }
-    private int Recurse(int[] cost,int curr,int[] dp)
-    {
-        if(curr >= cost.Length)
-        {
-            return 0;
-        }
-        if(dp[curr] != 0) return dp[curr];
-        int costOfOneStep = cost[curr] + Recurse(cost,curr+1,dp);
-        int costOfTwoStep = cost[curr] + Recurse(cost,curr+2,dp);
-        dp[curr] = Math.Min(costOfOneStep,costOfTwoStep);  
-        return  dp[curr];     
-    }
+    Dictionary<int,int> dp;
+    public int MinCostClimbingStairs(int[] cost) 
+    {
+        dp = new Dictionary<int,int>();
+        return Math.Min(Recurse(cost,0),Recurse(cost,1));
+    }
+    private int Recurse(int[] cost,int index)
+    {
+        if(index > cost.Length-1) return 0;
+        
+        if(!dp.ContainsKey(index))
+        {
+            if(index == cost.Length-1)
+            {
+                dp.Add(index,cost[index]);
+            }
+            else
+            {
+                int choice1 = Recurse(cost,index+1);
+        
+                int choice2 = Recurse(cost,index+2);
+        
+                dp.Add(index,cost[index] + Math.Min(choice1,choice2));
+            }    
+        }            
+        return dp[index];
+    }
 }
