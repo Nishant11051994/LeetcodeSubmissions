@@ -1,20 +1,23 @@
 public class Solution {
-    public int ClimbStairs(int n) 
-    {
-       int[] dp = new int[n+1]; 
-       return Recurse(n,dp);
-    }
-    private int Recurse(int n,int[] dp)
-    {
-        if(n == 0) return 1;
-        
-        if(n == 1) return 1;
-        
-        if(dp[n]!=0) return dp[n];
-        
-        int step1 = Recurse(n-1,dp);
-        int step2 = Recurse(n-2,dp);
-        dp[n] = step1 + step2;
-        return dp[n];
-    }
+    Dictionary<int,int> dp;
+    public int ClimbStairs(int n) 
+    {
+        dp = new Dictionary<int,int>();
+        dp.Add(0,0);
+        dp.Add(1,1);
+        dp.Add(2,2);
+        return Recurse(n);
+    }
+    private int Recurse(int n)
+    {
+        if(!dp.ContainsKey(n))
+        {
+            int oneStepAtATime = Recurse(n-1);
+        
+            int twoStepAtATime = Recurse(n-2);
+            
+            dp.Add(n,oneStepAtATime+twoStepAtATime);
+        }        
+        return dp[n];
+    }
 }
