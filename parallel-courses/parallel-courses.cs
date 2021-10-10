@@ -36,24 +36,29 @@ public class Solution {
                 indegreeEmpty.Enqueue(i);
             }
         }
+        indegreeEmpty.Enqueue(-1);
         int count = 0;
+        // Only Change from Regular Khan's Algorithm
         while(indegreeEmpty.Count != 0)
-        {        
-            step++;
-            Queue<int> tempQueue = new Queue<int>();            
-            while(indegreeEmpty.Count != 0)
+        {   
+            int curr = indegreeEmpty.Dequeue();
+            if(curr != -1)
             {
-                int curr = indegreeEmpty.Dequeue();
                 count++;
                 foreach(var currItem in graph[curr])
                 {
                     if(--indegree[currItem] == 0)
                     {
-                     tempQueue.Enqueue(currItem);
+                     indegreeEmpty.Enqueue(currItem);
                     }
                  }
-            }            
-            indegreeEmpty = tempQueue;            
+            }
+            else
+            {
+                 step++;
+                 if(indegreeEmpty.Count != 0)
+                     indegreeEmpty.Enqueue(-1);
+            }         
         }        
         if(count != n) return -1;        
         return step;        
