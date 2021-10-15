@@ -3,28 +3,27 @@ public class Solution {
     {
         if(string.IsNullOrEmpty(s)) return 0;
         
-        Dictionary<char,int> dict = new Dictionary<char,int>();
-        
-        int start = 0;
-        
+        Dictionary<char,int> map = new Dictionary<char,int>();
         int maxLength = 0;
-        
-        for(int end = 0 ; end < s.Length ; end++)
-        {                     
-            if(!dict.ContainsKey(s[end]))
+        int start = 0;
+        for(int end = 0; end < s.Length ; end++)
+        {
+            if(!map.ContainsKey(s[end]))
             {
-                dict.Add(s[end],0);
-            } 
-            dict[s[end]]++; 
-            while(dict.Count > k)
+                map.Add(s[end],0);
+                k--;
+            }
+            map[s[end]]++;
+            while(k < 0)
             {
-               dict[s[start]]--;
-               if(dict[s[start]] == 0)
-               {
-                  dict.Remove(s[start]);
-               }
-               start++;
-            }    
+                map[s[start]]--;
+                if(map[s[start]] == 0)
+                {
+                    map.Remove(s[start]);
+                    k++;
+                }
+                start++;
+            }
             maxLength = Math.Max(maxLength,end-start+1);
         }
         
