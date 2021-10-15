@@ -3,29 +3,23 @@ public class Solution {
     {
         if(string.IsNullOrEmpty(s)) return 0;
         
-        int end = 0;
+        HashSet<int> set = new HashSet<int>();
         
         int start = 0;
-        
-        Dictionary<char,int> dict = new Dictionary<char,int>();
-        
         int maxLength = 0;
         
-        while(end < s.Length)
+        for(int end = 0 ; end < s.Length ; end++)
         {
-            while(dict.ContainsKey(s[end]))
-            {            
-                dict.Remove(s[start]);
-                start++;
-            }
-                       
-            if(!dict.ContainsKey(s[end]))
+            if(set.Contains(s[end]))
             {
-                dict.Add(s[end],1);
-            }            
-           
+                 while(set.Contains(s[end]))
+                {
+                    set.Remove(s[start]);
+                    start++;
+                }
+            }
+            set.Add(s[end]);
             maxLength = Math.Max(maxLength,end-start+1);
-            end++;
         }
         
         return maxLength;
