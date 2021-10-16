@@ -1,29 +1,24 @@
 public class Solution {
     public int FindLength(int[] nums1, int[] nums2) 
     {
-        if(nums1.Length == 0 && nums2.Length == 0) return 0;
+        if(nums1 == null || nums2 == null) return 0;
         
         int maxLength = 0;
         
-        for(int i = 0 ; i < nums1.Length; i++)
+        int[,] dp = new int[nums1.Length+1,nums2.Length+1];
+        
+        for(int i = 1 ; i <= nums1.Length ; i++)
         {
-            for(int j = 0 ; j < nums2.Length ; j++)
+            for(int j = 1 ; j <= nums2.Length ; j++)
             {
-                int currLength = 0;
-                if(nums1[i] == nums2[j])
+                if(nums1[i-1] == nums2[j-1])
                 {
-                    int p = i;
-                    int q = j;
-                    while(p < nums1.Length && q < nums2.Length && nums1[p] == nums2[q])
-                    {
-                        currLength++;
-                        p++;
-                        q++;
-                    }
+                    dp[i,j] = dp[i-1,j-1] + 1;
+                    maxLength = Math.Max(maxLength,dp[i,j]);
                 }
-                maxLength = Math.Max(currLength,maxLength);
             }
         }
+        
         return maxLength;
     }
 }
